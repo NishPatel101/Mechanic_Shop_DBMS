@@ -1,0 +1,591 @@
+LOG:  database system was shut down at 2020-08-18 10:35:45 PDT
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2020-08-18 10:39:01 PDT
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2020-08-18 10:39:57 PDT
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  could not open file "customer.csv" for reading: No such file or directory
+STATEMENT:  COPY Customer (
+		id,
+		fname,
+		lname,
+		phone,
+		address
+	)
+	FROM 'customer.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "mechanic.csv" for reading: No such file or directory
+STATEMENT:  COPY Mechanic (
+		id,
+		fname,
+		lname,
+		experience
+	)
+	FROM 'mechanic.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "car.csv" for reading: No such file or directory
+STATEMENT:  COPY Car (
+		vin,
+		make,
+		model,
+		year
+	)
+	FROM 'car.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "owns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM 'owns.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "service_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Service_Request (
+		rid,
+		customer_id,
+		car_vin,
+		date,
+		odometer,
+		complain
+	)
+	FROM 'service_request.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "closed_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Closed_Request (
+		wid,
+		rid,
+		mid,
+		date,
+		comment,
+		bill
+	)
+	FROM 'closed_request.csv'
+	WITH DELIMITER ',';
+ERROR:  database "jvo033_DB" already exists
+STATEMENT:  CREATE DATABASE "jvo033_DB";
+	
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  could not open file "/tmp/jvo033/cs-166_phase3_code/data/customer.csv" for reading: No such file or directory
+STATEMENT:  COPY Customer (
+		id,
+		fname,
+		lname,
+		phone,
+		address
+	)
+	FROM '/tmp/jvo033/cs-166_phase3_code/data/customer.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "/tmp/jvo033/cs-166_phase3_code/data/mechanic.csv" for reading: No such file or directory
+STATEMENT:  COPY Mechanic (
+		id,
+		fname,
+		lname,
+		experience
+	)
+	FROM '/tmp/jvo033/cs-166_phase3_code/data/mechanic.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "/tmp/jvo033/cs-166_phase3_code/data/car.csv" for reading: No such file or directory
+STATEMENT:  COPY Car (
+		vin,
+		make,
+		model,
+		year
+	)
+	FROM '/tmp/jvo033/cs-166_phase3_code/data/car.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "/tmp/jvo033/cs-166_phase3_code/data/owns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM '/tmp/jvo033/cs-166_phase3_code/data/owns.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "/tmp/jvo033/cs-166_phase3_code/data/service_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Service_Request (
+		rid,
+		customer_id,
+		car_vin,
+		date,
+		odometer,
+		complain
+	)
+	FROM '/tmp/jvo033/cs-166_phase3_code/data/service_request.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "/tmp/jvo033/cs-166_phase3_code/data/closed_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Closed_Request (
+		wid,
+		rid,
+		mid,
+		date,
+		comment,
+		bill
+	)
+	FROM '/tmp/jvo033/cs-166_phase3_code/data/closed_request.csv'
+	WITH DELIMITER ',';
+ERROR:  database "jvo033_DB" already exists
+STATEMENT:  CREATE DATABASE "jvo033_DB";
+	
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  could not open file "../data/customer.csv" for reading: No such file or directory
+STATEMENT:  COPY Customer (
+		id,
+		fname,
+		lname,
+		phone,
+		address
+	)
+	FROM '../data/customer.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "../data/mechanic.csv" for reading: No such file or directory
+STATEMENT:  COPY Mechanic (
+		id,
+		fname,
+		lname,
+		experience
+	)
+	FROM '../data/mechanic.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "../data/car.csv" for reading: No such file or directory
+STATEMENT:  COPY Car (
+		vin,
+		make,
+		model,
+		year
+	)
+	FROM '../data/car.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "../data/owns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM '../data/owns.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "../data/service_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Service_Request (
+		rid,
+		customer_id,
+		car_vin,
+		date,
+		odometer,
+		complain
+	)
+	FROM '../data/service_request.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "../data/closed_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Closed_Request (
+		wid,
+		rid,
+		mid,
+		date,
+		comment,
+		bill
+	)
+	FROM '../data/closed_request.csv'
+	WITH DELIMITER ',';
+ERROR:  database "jvo033_DB" already exists
+STATEMENT:  CREATE DATABASE "jvo033_DB";
+	
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  could not open file "customer.csv" for reading: No such file or directory
+STATEMENT:  COPY Customer (
+		id,
+		fname,
+		lname,
+		phone,
+		address
+	)
+	FROM 'customer.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "mechanic.csv" for reading: No such file or directory
+STATEMENT:  COPY Mechanic (
+		id,
+		fname,
+		lname,
+		experience
+	)
+	FROM 'mechanic.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "car.csv" for reading: No such file or directory
+STATEMENT:  COPY Car (
+		vin,
+		make,
+		model,
+		year
+	)
+	FROM 'car.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "owns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM 'owns.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "service_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Service_Request (
+		rid,
+		customer_id,
+		car_vin,
+		date,
+		odometer,
+		complain
+	)
+	FROM 'service_request.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "closed_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Closed_Request (
+		wid,
+		rid,
+		mid,
+		date,
+		comment,
+		bill
+	)
+	FROM 'closed_request.csv'
+	WITH DELIMITER ',';
+ERROR:  database "jvo033_DB" already exists
+STATEMENT:  CREATE DATABASE "jvo033_DB";
+	
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  could not open file "/tmp/jvo033/cs-166_phase3_code/data/customer.csv" for reading: No such file or directory
+STATEMENT:  COPY Customer (
+		id,
+		fname,
+		lname,
+		phone,
+		address
+	)
+	FROM '/tmp/jvo033/cs-166_phase3_code/data/customer.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "../tmp/jvo033/cs-166_phase3_code/data/mechanic.csv" for reading: No such file or directory
+STATEMENT:  COPY Mechanic (
+		id,
+		fname,
+		lname,
+		experience
+	)
+	FROM '../tmp/jvo033/cs-166_phase3_code/data/mechanic.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "~/tmp/jvo033/cs-166_phase3_code/data/car.csv" for reading: No such file or directory
+STATEMENT:  COPY Car (
+		vin,
+		make,
+		model,
+		year
+	)
+	FROM '~/tmp/jvo033/cs-166_phase3_code/data/car.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "owns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM 'owns.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "service_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Service_Request (
+		rid,
+		customer_id,
+		car_vin,
+		date,
+		odometer,
+		complain
+	)
+	FROM 'service_request.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "closed_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Closed_Request (
+		wid,
+		rid,
+		mid,
+		date,
+		comment,
+		bill
+	)
+	FROM 'closed_request.csv'
+	WITH DELIMITER ',';
+ERROR:  database "jvo033_DB" already exists
+STATEMENT:  CREATE DATABASE "jvo033_DB";
+	
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  could not open file "/tmp/jvo033/cs-166_phase3_code/data/customer.csv" for reading: No such file or directory
+STATEMENT:  COPY Customer (
+		id,
+		fname,
+		lname,
+		phone,
+		address
+	)
+	FROM '/tmp/jvo033/cs-166_phase3_code/data/customer.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "../tmp/jvo033/cs-166_phase3_code/data/mechanic.csv" for reading: No such file or directory
+STATEMENT:  COPY Mechanic (
+		id,
+		fname,
+		lname,
+		experience
+	)
+	FROM '../tmp/jvo033/cs-166_phase3_code/data/mechanic.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "~/tmp/jvo033/cs-166_phase3_code/data/car.csv" for reading: No such file or directory
+STATEMENT:  COPY Car (
+		vin,
+		make,
+		model,
+		year
+	)
+	FROM '~/tmp/jvo033/cs-166_phase3_code/data/car.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "owns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM 'owns.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "service_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Service_Request (
+		rid,
+		customer_id,
+		car_vin,
+		date,
+		odometer,
+		complain
+	)
+	FROM 'service_request.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "closed_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Closed_Request (
+		wid,
+		rid,
+		mid,
+		date,
+		comment,
+		bill
+	)
+	FROM 'closed_request.csv'
+	WITH DELIMITER ',';
+FATAL:  database "jvo033" does not exist
+FATAL:  database "jvo033_db" does not exist
+FATAL:  database "jvo033" does not exist
+ERROR:  table "jvo033" does not exist
+STATEMENT:  DROP TABLE jvo033;
+ERROR:  cannot drop the currently open database
+STATEMENT:  DROP DATABASE jvo033;
+ERROR:  cannot drop the currently open database
+STATEMENT:  DROP DATABASE jvo033;
+ERROR:  could not open file "/tmp/jvo033/data/dataowns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM '/tmp/jvo033/data/dataowns.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "tmp/jvo033/data/service_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Service_Request (
+		rid,
+		customer_id,
+		car_vin,
+		date,
+		odometer,
+		complain
+	)
+	FROM 'tmp/jvo033/data/service_request.csv'
+	WITH DELIMITER ',';
+ERROR:  could not open file "/data/closed_request.csv" for reading: No such file or directory
+STATEMENT:  COPY Closed_Request (
+		wid,
+		rid,
+		mid,
+		date,
+		comment,
+		bill
+	)
+	FROM '/data/closed_request.csv'
+	WITH DELIMITER ',';
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  could not open file "/tmp/jvo033/data/dataowns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM '/tmp/jvo033/data/dataowns.csv'
+	WITH DELIMITER ',';
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  could not open file "tmp/jvo033/data/owns.csv" for reading: No such file or directory
+STATEMENT:  COPY Owns (
+		ownership_id,
+		customer_id,
+		car_vin
+	)
+	FROM 'tmp/jvo033/data/owns.csv'
+	WITH DELIMITER ',';
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  cannot drop the currently open database
+STATEMENT:  DROP DATABASE jvo033_DB;
+ERROR:  SELECT * with no tables specified is not valid at character 8
+STATEMENT:  SELECT *
+	;
+ERROR:  database "jvo033_db" does not exist
+STATEMENT:  DROP DATABASE jvo033_DB
+	;
+ERROR:  database "jvo033_db" does not exist
+STATEMENT:  DROP DATABASE jvo033_DB;
+ERROR:  database "jvo033_db" does not exist
+STATEMENT:  DROP DATABASE jvo033_DB;
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
