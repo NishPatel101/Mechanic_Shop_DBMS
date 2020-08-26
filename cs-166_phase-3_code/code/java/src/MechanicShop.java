@@ -309,7 +309,27 @@ public class MechanicShop{
 	}
 	
 	public static void AddMechanic(MechanicShop esql){//2
-		
+		try {
+			//Finding new ID, since Mechanic.id is type int4
+			String nextID = "SELECT id FROM Mechanic;";
+			List<List<String>> usedIDs = esql.executeQueryAndReturnResult(nextID);
+			int id = usedIDs.size() + 1;
+
+			System.out.print("Enter new mechanic's first name: ");
+			String fname = in.readLine();
+			System.out.print("Enter new mechanic's last name: ");
+			String lname = in.readLine();
+			System.out.print("Enter new mechanic's years of experience: ");
+			String experience = in.readLine();
+			
+			String addMechanic = "INSERT INTO Mechanic (fname, lname, experience) ";
+			       addMechanic += "VALUES ("'" + fname + ", '" + lname + ", '" + experience + ");";
+			
+			esql.executeUpdate(addMechanic);
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 	
 	public static void AddCar(MechanicShop esql){//3
@@ -317,7 +337,54 @@ public class MechanicShop{
 	}
 	
 	public static void InsertServiceRequest(MechanicShop esql){//4
-		
+		try {
+			//Finding new ID, since Service_Request.rid is type in4
+			String nextID = "SELECT rid FROM Service_Request;";
+			List<List<String>> usedIDs = esql.executeQueryAndReturnResult(nextID);
+			int rid = usedIDs.size() + 1;
+			
+			System.out.print("Enter last name of customer: ");
+			String lastName = in.readLine();
+			
+			String lookupLastName = "SELECT * FROM Customer WHERE lname = '" + lastName + "';";
+			int numRows = esql.executeQueryAndPrintResult(lookupLastName);
+
+			if (numRows == 0) {
+				boolean decide = false;
+				do {
+					System.out.println("Could not find a customer with that last name. Would you like to add a new customer? Y/N");
+					String input = in.readLine();
+					if (input.equalsIgnoreCase("Y")) {
+						AddCustomer(esql);
+						decide = true;	
+					}
+					else if (input.equalsIgnoreCase("N")) {
+						System.out.println("Cancelling initiated service request.");
+						decide = true;
+					}
+				} while (!decide);
+			}
+			else {
+				System.out.print("Enter customer id: ");
+				String inputID = in.readLine();
+				int cid = Integer.parseInt(inputID);
+				String selectCar = "SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin), C FROM Customer Cust, Owns O, Car C WHERE Cust.id = O.customer_id AND C.vin = O.car_vin AND O.customer_id = '" + cid + "'";
+				int numRows = esql.executeQueryAndPrintResult(selectCar);
+				System.out.print("Input row number of car to select or 0 to add a new car: ");
+				String rowChoice = in.readLine();
+				int row = Integer.parseInt(rowChoice);
+				
+				if (row == 0) {
+					AddCar(esql);
+				}
+				else {
+					String 
+				}
+			}
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 	
 	public static void CloseServiceRequest(MechanicShop esql) throws Exception{//5
@@ -325,7 +392,17 @@ public class MechanicShop{
 	}
 	
 	public static void ListCustomersWithBillLessThan100(MechanicShop esql){//6
-		
+		try {
+			String less_than_100 = "SELECT date, comment, bill ";
+			       less_than_100 += "FROM Closed_Request ";
+			       less_than_100 += "WHERE bill < 100;";
+
+			int numRows = esql.executeQueryAndPrintResult(less_than_100);
+			System.out.println("Total row(s): " + numRows);
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 	
 	public static void ListCustomersWithMoreThan20Cars(MechanicShop esql){//7
@@ -333,17 +410,42 @@ public class MechanicShop{
 	}
 	
 	public static void ListCarsBefore1995With50000Milles(MechanicShop esql){//8
-		
+		try {
+			String query = "SELECT C.make, C.model, C.year ";
+			       query += "FROM Car C, Service_Request S ";
+			       query += "WHERE S.car_vin = C.vin ";
+			       query += "AND S.odometer < 50000 ";
+			       query += "AND C.year < 1995;";
+
+			int numRows = esql.executeQueryAndPrintResult(query);
+			System.out.println("Total row(s): " + numRows);
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 	
 	public static void ListKCarsWithTheMostServices(MechanicShop esql){//9
-		//
 		
 	}
 	
-	public static void ListCustomersInDescendingOrderOfTheirTotalBill(MechanicShop esql){//9
-		//
-		
+	public static void ListCustomersInDescendingOrderOfTheirTotalBill(MechanicShop esql){//10
+		try {
+			String query = "SELECT C.fname, C.lname, Total ";
+			       query += "FROM Customer C, ";
+					query += "(SELECT SUM(CR.bill) AS Total, SR.customer_id ";
+					query += "FROM Closed_Request CR, Service_Request SR ";
+					query += "WHERE CR.rid = SR.rid ";
+					query += "GROUP BY SR.customer_id) AS AggrCost ";
+			       query += "WHERE C.id = AggrCost.customer_id ";
+			       query += "ORDER BY AggrCost.Total DESC;";
+
+			int numRows = esql.executeQueryAndPrintResult(query);
+			System.out.println("Total row(s): " + numRows);
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 	
 }
