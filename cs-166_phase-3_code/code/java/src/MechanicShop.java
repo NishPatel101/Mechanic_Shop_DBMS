@@ -323,7 +323,7 @@ public class MechanicShop{
 			String experience = in.readLine();
 			
 			String addMechanic = "INSERT INTO Mechanic (fname, lname, experience) ";
-			       addMechanic += "VALUES ("'" + fname + ", '" + lname + ", '" + experience + ");";
+			       addMechanic += "VALUES (\"'\" + fname + \", '\" + lname + \", '\" + experience + \");";
 			
 			esql.executeUpdate(addMechanic);
 		}
