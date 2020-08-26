@@ -319,7 +319,7 @@ public class MechanicShop{
 	         	System.out.print("Enter new customer's address: ");
 			String c_address = in.readLine();
 		
-			String query = "INSERT INTO Customer (c_fname, c_lname, c_phone, c_address) ";
+			String query = "INSERT INTO Customer (fname, lname, phone, address) ";
 				query += "VALUES (\'" + c_fname + "\',\'" + c_lname + "\',\'" + c_phone + "\',\'" + c_address + "\');";
 		
 			esql.executeUpdate(query);
