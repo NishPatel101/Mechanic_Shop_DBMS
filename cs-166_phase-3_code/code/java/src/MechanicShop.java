@@ -333,7 +333,7 @@ public class MechanicShop{
 			//Finding new ID, since Mechanic.id is type int4
 			String nextID = "SELECT id FROM Mechanic;";
 			List<List<String>> usedIDs = esql.executeQueryAndReturnResult(nextID);
-			int id = usedIDs.size() + 1;
+			int m_id = usedIDs.size() + 1;
 
 			System.out.print("Enter new mechanic's first name: ");
 			String fname = in.readLine();
@@ -342,8 +342,8 @@ public class MechanicShop{
 			System.out.print("Enter new mechanic's years of experience: ");
 			String experience = in.readLine();
 			
-			String addMechanic = "INSERT INTO Mechanic (fname, lname, experience) ";
-				addMechanic += "VALUES (\'" + fname + "\',\'" + lname + "\',\'" + experience + "\');";	
+			String addMechanic = "INSERT INTO Mechanic (id, fname, lname, experience) ";
+				addMechanic += "VALUES (\'" + m_id + "\',\'" + fname + "\',\'" + lname + "\',\'" + experience + "\');";	
 			
 			esql.executeUpdate(addMechanic);
 		}
