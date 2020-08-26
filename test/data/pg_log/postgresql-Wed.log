@@ -1,3 +1,56 @@
 LOG:  database system was shut down at 2020-08-25 23:26:16 PDT
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
+ERROR:  column "c_fname" of relation "customer" does not exist at character 23
+STATEMENT:  INSERT INTO Customer (c_fname, c_lname, c_phone, c_address) VALUES ('Johnny','Vo','9510007777','1 Pentland Way')
+ERROR:  null value in column "id" violates not-null constraint
+DETAIL:  Failing row contains (null, Johnny                          , Vo                              , 9510002222   , 1 Pentland Way                                                  ...).
+STATEMENT:  INSERT INTO Customer (fname, lname, phone, address) VALUES ('Johnny','Vo','9510002222','1 Pentland Way')
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
+ERROR:  type "us_postal_code" already exists
+STATEMENT:  CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ '^\d{5}$' OR VALUE ~ '^\d{5}-\d{4}$');
+ERROR:  type "_status" already exists
+STATEMENT:  CREATE DOMAIN _STATUS CHAR(1) CHECK (value IN ( 'W' , 'C', 'R' ) );
+ERROR:  type "_gender" already exists
+STATEMENT:  CREATE DOMAIN _GENDER CHAR(1) CHECK (value IN ( 'F' , 'M' ) );
+ERROR:  type "_code" already exists
+STATEMENT:  CREATE DOMAIN _CODE CHAR(2) CHECK (value IN ( 'MJ' , 'MN', 'SV' ) );
+ERROR:  type "_pinteger" already exists
+STATEMENT:  CREATE DOMAIN _PINTEGER AS int4 CHECK(VALUE > 0);
+ERROR:  type "_pzerointeger" already exists
+STATEMENT:  CREATE DOMAIN _PZEROINTEGER AS int4 CHECK(VALUE >= 0);
+ERROR:  type "_years" already exists
+STATEMENT:  CREATE DOMAIN _YEARS AS int4 CHECK(VALUE >= 0 AND VALUE < 100);
+ERROR:  type "_year" already exists
+STATEMENT:  CREATE DOMAIN _YEAR AS int4 CHECK(VALUE >= 1970);
