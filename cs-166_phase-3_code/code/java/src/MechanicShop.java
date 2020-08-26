@@ -305,7 +305,27 @@ public class MechanicShop{
 	}//end readChoice
 	
 	public static void AddCustomer(MechanicShop esql){//1
+		try{
+			String findIDsize = "SELECT id FROM Customer;";
+			int countCID;
+			List<List<String>> numOfCID = esql.executeQueryAndReturnResult(findIDsize);
+			countCID = numOfCID.size();
+			System.out.print("Enter new customer's first name: ");
+			String c_fname = in.readLine();
+			System.out.print("Enter new customer's last name: ");
+			String c_lname = in.readLine();
+			System.out.print("Enter new customer's phone number: ");
+			String c_phone = in.readLine();
+	         	System.out.print("Enter new customer's address: ");
+			String c_address = in.readLine();
 		
+			String query = "INSERT INTO Customer (c_fname, c_lname, c_phone, c_address) ";
+				query += "VALUES (\'" + c_fname + "\',\'" + c_lname + "\',\'" + c_phone + "\',\'" + c_address + "\');";
+		
+			esql.executeUpdate(query);
+		}catch(Exception e){
+			System.err.println(e.getMessage());
+		}
 	}
 	
 	public static void AddMechanic(MechanicShop esql){//2
@@ -333,7 +353,25 @@ public class MechanicShop{
 	}
 	
 	public static void AddCar(MechanicShop esql){//3
-		
+		try{
+			System.out.print("Enter new car's VIN: ");
+			String car_vin = in.readLine();
+			System.out.print("Enter new car's make: ");
+			String car_make = in.readLine();
+			System.out.print("Enter new car's model: ");
+			String car_model = in.readLine();
+			System.out.print("Enter new car's year: ");
+			String car_year_string = in.readLine(); //convert string to int
+			int car_year = Integer.parseInt(car_year_string);
+
+			String query = "INSERT INTO Car(vin, make, model, year) ";
+				query += "VALUES (\'" + car_vin + "\',\'" + car_make + "\',\'" + car_model + "\',\'" + car_year + "\');";
+
+        		esql.executeUpdate(query);
+			
+      		}catch(Exception e){
+        		 System.err.println (e.getMessage());
+      		}
 	}
 	
 	public static void InsertServiceRequest(MechanicShop esql){//4
