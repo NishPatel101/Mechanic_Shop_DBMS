@@ -319,7 +319,8 @@ public class MechanicShop{
 	         	System.out.print("Enter new customer's address: ");
 			String c_address = in.readLine();
 		
-			String query = "INSERT INTO Customer (id, fname, lname, phone, address) VALUES (\'" + countCID + "\','" + c_fname + "\',\'" + c_lname + "\',\'" + c_phone + "\',\'" + c_address + "\');";
+			String query = "INSERT INTO Customer (id, fname, lname, phone, address) ";
+				query += "VALUES (\'" + countCID + "\','" + c_fname + "\',\'" + c_lname + "\',\'" + c_phone + "\',\'" + c_address + "\');";
 		
 			esql.executeUpdate(query);
 		}catch(Exception e){
@@ -341,8 +342,8 @@ public class MechanicShop{
 			System.out.print("Enter new mechanic's years of experience: ");
 			String experience = in.readLine();
 			
-			String addMechanic = "INSERT INTO Mechanic (id, fname, lname, experience) ";
-			       addMechanic += "VALUES (" + id + ", '" + fname + "', '" + lname + "', " + experience + ");";
+			String addMechanic = "INSERT INTO Mechanic (fname, lname, experience) ";
+				addMechanic += "VALUES (\'" + fname + "\',\'" + lname + "\',\'" + experience + "\');";	
 			
 			esql.executeUpdate(addMechanic);
 		}
@@ -360,8 +361,11 @@ public class MechanicShop{
 			System.out.print("Enter new car's model: ");
 			String car_model = in.readLine();
 			System.out.print("Enter new car's year: ");
-			int car_year = in.readLine();
-			String query = "INSERT INTO Car(vin, make, model, year) VALUES (\'" + car_vin + "\',\'" + car_make + "\',\'" + car_model + "\',\'" + car_year + "\');";
+			String car_year_string = in.readLine(); //convert string to int
+			int car_year = Integer.parseInt(car_year_string);
+
+			String query = "INSERT INTO Car(vin, make, model, year) ";
+				query += "VALUES (\'" + car_vin + "\',\'" + car_make + "\',\'" + car_model + "\',\'" + car_year + "\');";
 
         		esql.executeUpdate(query);
 			
@@ -400,60 +404,19 @@ public class MechanicShop{
 			}
 			else {
 				System.out.print("Enter customer id: ");
-				String inputCID = in.readLine();
-				String selectCar = "SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin), C FROM Customer Cust, Owns O, Car C WHERE Cust.id = O.customer_id AND C.vin = O.car_vin AND O.customer_id = '" + inputCID + "'";
-				int numRows = esql.executeQueryAndPrintResult(selectCar);
+				String inputID = in.readLine();
+				int cid = Integer.parseInt(inputID);
+				String selectCar = "SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin), C FROM Customer Cust, Owns O, Car C WHERE Cust.id = O.customer_id AND C.vin = O.car_vin AND O.customer_id = '" + cid + "'";
+				numRows = esql.executeQueryAndPrintResult(selectCar);
 				System.out.print("Input row number of car to select or 0 to add a new car: ");
 				String rowChoice = in.readLine();
 				int row = Integer.parseInt(rowChoice);
 				
 				if (row == 0) {
-					//Replace function call with code for brute force way
-					//of getting the added car's vin to insert into new SR (unless there is a better solution)
-					System.out.print("Enter new car's VIN: ");
-            				String car_vin = in.readLine();
-            				System.out.print("Enter new car's make: ");
-            				String car_make = in.readLine();
-            				System.out.print("Enter new car's model: ");
-            				String car_model = in.readLine();
-            				System.out.print("Enter new car's year: ");
-            				String car_year_string = in.readLine(); //convert string to int
-            				int car_year = Integer.parseInt(car_year_string);
-
-            				String query = "INSERT INTO Car(vin, make, model, year) ";
-                			query += "VALUES ('" + car_vin + "','" + car_make + "','" + car_model + "','" + car_year + "');";
-
-                			esql.executeUpdate(query);
-
-
-					System.out.print("Enter current odometer reading on the car: ");
-					String odometer = in.readLine();
-					System.out.print("Enter customer's complaints with the car: ");
-			 		String complaint = in.readLine();
-					
-					String initiateSR = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + Integer.toString(cid) + ", '" + car_vin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
+					AddCar(esql);
 				}
 				else {
-					String findCar = "SELECT carToService FROM ";
-							findCar += "(SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin) AS rowNum, C.vin, C.make, C.model, C.year ";
-							findCar += "FROM Customer Cust, Owns O, Car C ";
-							findCar += "WHERE C.vin = O.car_vin ";
-							findCar += "AND O.customer_id = Cust.id ";
-							findCar += "AND O.customer_id = '" + inputID + "') AS carToService ";
-					       findCar += "WHERE rowNum = " + rowChoice + ";";
-					
-					List<List<String>> cars = esql.executeQueryAndReturnResult(findCar);
-					String selectedCar = cars.get(0).get(0);
-					String[] parse = selectedCar.split(",");
-					String vin = output[1];
-
-					System.out.print("Enter odometer reading on the car: ");
-					String odometer = in.readLine();
-					System.out.print("Enter customer's complaint(s) about the car: ");
-					String complaint = in.readLine();
-
-					String addServiceRequest = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + Integer.toString(cid) + ", '" + vin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
-					esql.executeUpdate(addServiceRequest);
+					//String 
 				}
 			}
 		}
@@ -468,11 +431,9 @@ public class MechanicShop{
 	
 	public static void ListCustomersWithBillLessThan100(MechanicShop esql){//6
 		try {
-			String less_than_100 = "SELECT Cust.fname, Cust.lname, CR.date, CR.comment, CR.bill ";
-			       less_than_100 += "FROM Customer Cust, Service_Request SR, Closed_Request CR ";
-			       less_than_100 += "WHERE CR.bill < 100 ";
-			       less_than_100 += "AND Cust.id = SR.customer_id ";
-			       less_than_100 += "AND SR.rid = CR.rid;";
+			String less_than_100 = "SELECT date, comment, bill ";
+			       less_than_100 += "FROM Closed_Request ";
+			       less_than_100 += "WHERE bill < 100;";
 
 			int numRows = esql.executeQueryAndPrintResult(less_than_100);
 			System.out.println("Total row(s): " + numRows);
@@ -510,9 +471,6 @@ public class MechanicShop{
 	}
 	
 	public static void ListKCarsWithTheMostServices(MechanicShop esql){//9
-		System.out.print("Input number of cars you want listed: ");
-		int listNum = in.readLine();
-		
 		
 	}
 	
