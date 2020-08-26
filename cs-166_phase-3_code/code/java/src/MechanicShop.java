@@ -445,7 +445,7 @@ public class MechanicShop{
 	
 	public static void ListCustomersWithMoreThan20Cars(MechanicShop esql){//7
 		try{
- 		String query = "SELECT C.fname, C.lname, numOwnedCars FROM (SELECT C.id, C.fname, C.lname, COUNT(*) AS numOwnedCars FROM Owns O,Customer C WHERE C.id = O.customer_id GROUP BY C.id, C.fname, C.lname) WHERE numOwnedCars > 20;";
+ 		String query = "SELECT numList.fname, numList.lname, numList.numOwnedCars FROM (SELECT C.id, C.fname, C.lname, COUNT(*) AS numOwnedCars FROM Owns O,Customer C WHERE C.id = O.customer_id GROUP BY C.id, C.fname, C.lname) AS numList WHERE numOwnedCars > 20;";
 		
  		int rowCount = esql.executeQueryAndPrintResult(query);
  		System.out.println ("total row(s): " + rowCount);
