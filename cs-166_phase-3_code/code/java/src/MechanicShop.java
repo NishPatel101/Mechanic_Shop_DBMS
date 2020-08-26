@@ -444,7 +444,18 @@ public class MechanicShop{
 	}
 	
 	public static void ListCustomersWithMoreThan20Cars(MechanicShop esql){//7
+		try{
+ 		String query = "SELECT allCars.fname, allCars.lname, allCars.numCars 
+				FROM (SELECT Owns.customer_id, Customer.fname, Customer.lname, COUNT(*) numCars 
+				      FROM Owns,Customer 
+				       WHERE Customer.id = Owns.customer_id GROUP BY Owns.customer_id, Customer.fname, Customer.lname) 
+					AS allCars WHERE numCars > 20;";
 		
+ 		int rowCount = esql.executeQueryAndPrintResult(query);
+ 		System.out.println ("total row(s): " + rowCount);
+		}catch(Exception e){
+ 			System.err.println (e.getMessage());
+		}
 	}
 	
 	public static void ListCarsBefore1995With50000Milles(MechanicShop esql){//8
