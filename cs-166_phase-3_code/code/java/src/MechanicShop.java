@@ -374,8 +374,8 @@ public class MechanicShop{
       		}
 	}
 	
-	public static void InsertServiceRequest(MechanicShop esql){//4
-		/*try {
+public static void InsertServiceRequest(MechanicShop esql){//4
+		try {
 			//Finding new ID, since Service_Request.rid is type in4
 			String nextID = "SELECT rid FROM Service_Request;";
 			List<List<String>> usedIDs = esql.executeQueryAndReturnResult(nextID);
@@ -406,7 +406,7 @@ public class MechanicShop{
 				System.out.print("Enter customer id: ");
 				String inputCID = in.readLine();
 				String selectCar = "SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin), C FROM Customer Cust, Owns O, Car C WHERE Cust.id = O.customer_id AND C.vin = O.car_vin AND O.customer_id = '" + inputCID + "'";
-				int numRows = esql.executeQueryAndPrintResult(selectCar);
+				numRows = esql.executeQueryAndPrintResult(selectCar);
 				System.out.print("Input row number of car to select or 0 to add a new car: ");
 				String rowChoice = in.readLine();
 				int row = Integer.parseInt(rowChoice);
@@ -435,7 +435,7 @@ public class MechanicShop{
 					System.out.print("Enter customer's complaints with the car: ");
 			 		String complaint = in.readLine();
 					
-					String initiateSR = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + Integer.toString(cid) + ", '" + car_vin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
+					String initiateSR = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + inputCID + ", '" + car_vin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
 				}
 				else {
 					String findCar = "SELECT carToService FROM ";
@@ -443,27 +443,27 @@ public class MechanicShop{
 							findCar += "FROM Customer Cust, Owns O, Car C ";
 							findCar += "WHERE C.vin = O.car_vin ";
 							findCar += "AND O.customer_id = Cust.id ";
-							findCar += "AND O.customer_id = '" + inputID + "') AS carToService ";
+							findCar += "AND O.customer_id = '" + inputCID + "') AS carToService ";
 					       findCar += "WHERE rowNum = " + rowChoice + ";";
 					
 					List<List<String>> cars = esql.executeQueryAndReturnResult(findCar);
 					String selectedCar = cars.get(0).get(0);
 					String[] parse = selectedCar.split(",");
-					String vin = output[1];
+					String vin = parse[1];
 
 					System.out.print("Enter odometer reading on the car: ");
 					String odometer = in.readLine();
 					System.out.print("Enter customer's complaint(s) about the car: ");
 					String complaint = in.readLine();
 
-					String addServiceRequest = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + Integer.toString(cid) + ", '" + vin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
+					String addServiceRequest = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + inputCID + ", '" + vin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
 					esql.executeUpdate(addServiceRequest);
 				}
 			}
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
-		}*/
+		}
 	}
 	
 	public static void CloseServiceRequest(MechanicShop esql) throws Exception{//5
