@@ -514,7 +514,9 @@ public class MechanicShop{
 	}
 	
 	public static void ListKCarsWithTheMostServices(MechanicShop esql){//9
-		
+		System.out.print("Input how many cars should be listed: ");
+		String numCars_string = in.readLine();
+		int numCars = Integer.parseInt(numCars_string);
 	}
 	
 	public static void ListCustomersInDescendingOrderOfTheirTotalBill(MechanicShop esql){//10
