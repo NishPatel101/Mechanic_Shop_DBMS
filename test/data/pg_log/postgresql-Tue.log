@@ -615,3 +615,28 @@ LOG:  database system is shut down
 LOG:  database system was shut down at 2020-08-25 22:13:39 PDT
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
+ERROR:  column "johnny" does not exist at character 38
+STATEMENT:  SELECT * FROM Mechanic WHERE fname = Johnny AND lname = Vo
+	;
+ERROR:  column "johnny" does not exist at character 38
+STATEMENT:  SELECT * FROM Mechanic WHERE fname = Johnny
+	;
+ERROR:  column "antoine" does not exist at character 38
+STATEMENT:  SELECT * FROM Mechanic WHERE fname = Antoine
+	;
+ERROR:  column "Antoine" does not exist at character 38
+STATEMENT:  SELECT * FROM Mechanic WHERE fname = "Antoine"
+	;
+ERROR:  null value in column "id" violates not-null constraint
+DETAIL:  Failing row contains (null, Johnny                          , Vo                              , 2).
+STATEMENT:  INSERT INTO Mechanic (fname, lname, experience) VALUES ('Johnny','Vo','2')
+ERROR:  null value in column "id" violates not-null constraint
+DETAIL:  Failing row contains (null, Johnny                          , Vo                              , 2).
+STATEMENT:  INSERT INTO Mechanic (fname, lname, experience) VALUES ('Johnny','Vo','2')
+ERROR:  update or delete on table "service_request" violates foreign key constraint "closed_request_rid_fkey" on table "closed_request"
+DETAIL:  Key (rid)=(1) is still referenced from table "closed_request".
+STATEMENT:  DELETE FROM service_request;
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
