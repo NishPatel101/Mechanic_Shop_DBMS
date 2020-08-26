@@ -404,19 +404,60 @@ public class MechanicShop{
 			}
 			else {
 				System.out.print("Enter customer id: ");
-				String inputID = in.readLine();
-				int cid = Integer.parseInt(inputID);
-				String selectCar = "SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin), C FROM Customer Cust, Owns O, Car C WHERE Cust.id = O.customer_id AND C.vin = O.car_vin AND O.customer_id = '" + cid + "'";
-				numRows = esql.executeQueryAndPrintResult(selectCar);
+				String inputCID = in.readLine();
+				String selectCar = "SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin), C FROM Customer Cust, Owns O, Car C WHERE Cust.id = O.customer_id AND C.vin = O.car_vin AND O.customer_id = '" + inputCID + "'";
+				int numRows = esql.executeQueryAndPrintResult(selectCar);
 				System.out.print("Input row number of car to select or 0 to add a new car: ");
 				String rowChoice = in.readLine();
 				int row = Integer.parseInt(rowChoice);
 				
 				if (row == 0) {
-					AddCar(esql);
+					//Replace function call with code for brute force way
+					//of getting the added car's vin to insert into new SR (unless there is a better solution)
+					System.out.print("Enter new car's VIN: ");
+            				String car_vin = in.readLine();
+            				System.out.print("Enter new car's make: ");
+            				String car_make = in.readLine();
+            				System.out.print("Enter new car's model: ");
+            				String car_model = in.readLine();
+            				System.out.print("Enter new car's year: ");
+            				String car_year_string = in.readLine(); //convert string to int
+            				int car_year = Integer.parseInt(car_year_string);
+
+            				String query = "INSERT INTO Car(vin, make, model, year) ";
+                			query += "VALUES ('" + car_vin + "','" + car_make + "','" + car_model + "','" + car_year + "');";
+
+                			esql.executeUpdate(query);
+
+
+					System.out.print("Enter current odometer reading on the car: ");
+					String odometer = in.readLine();
+					System.out.print("Enter customer's complaints with the car: ");
+			 		String complaint = in.readLine();
+					
+					String initiateSR = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + Integer.toString(cid) + ", '" + car_vin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
 				}
 				else {
-					//String 
+					String findCar = "SELECT carToService FROM ";
+							findCar += "(SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin) AS rowNum, C.vin, C.make, C.model, C.year ";
+							findCar += "FROM Customer Cust, Owns O, Car C ";
+							findCar += "WHERE C.vin = O.car_vin ";
+							findCar += "AND O.customer_id = Cust.id ";
+							findCar += "AND O.customer_id = '" + inputID + "') AS carToService ";
+					       findCar += "WHERE rowNum = " + rowChoice + ";";
+					
+					List<List<String>> cars = esql.executeQueryAndReturnResult(findCar);
+					String selectedCar = cars.get(0).get(0);
+					String[] parse = selectedCar.split(",");
+					String vin = output[1];
+
+					System.out.print("Enter odometer reading on the car: ");
+					String odometer = in.readLine();
+					System.out.print("Enter customer's complaint(s) about the car: ");
+					String complaint = in.readLine();
+
+					String addServiceRequest = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + Integer.toString(cid) + ", '" + vin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
+					esql.executeUpdate(addServiceRequest);
 				}
 			}
 		}
