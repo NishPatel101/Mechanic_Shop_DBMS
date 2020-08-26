@@ -333,7 +333,7 @@ public class MechanicShop{
 			//Finding new ID, since Mechanic.id is type int4
 			String nextID = "SELECT id FROM Mechanic;";
 			List<List<String>> usedIDs = esql.executeQueryAndReturnResult(nextID);
-			int m_id = usedIDs.size() + 1;
+			int m_id = usedIDs.size();
 
 			System.out.print("Enter new mechanic's first name: ");
 			String fname = in.readLine();
