@@ -375,7 +375,7 @@ public class MechanicShop{
 	}
 	
 	public static void InsertServiceRequest(MechanicShop esql){//4
-		try {
+		/*try {
 			//Finding new ID, since Service_Request.rid is type in4
 			String nextID = "SELECT rid FROM Service_Request;";
 			List<List<String>> usedIDs = esql.executeQueryAndReturnResult(nextID);
@@ -463,7 +463,7 @@ public class MechanicShop{
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
-		}
+		}*/
 	}
 	
 	public static void CloseServiceRequest(MechanicShop esql) throws Exception{//5
@@ -472,9 +472,11 @@ public class MechanicShop{
 	
 	public static void ListCustomersWithBillLessThan100(MechanicShop esql){//6
 		try {
-			String less_than_100 = "SELECT date, comment, bill ";
-			       less_than_100 += "FROM Closed_Request ";
-			       less_than_100 += "WHERE bill < 100;";
+			String less_than_100 = "SELECT Cust.fname, Cust.lname, CR.date, CR.comment, CR.bill ";
+			       less_than_100 += "FROM Customer Cust, Service_Request SR, Closed_Request CR ";
+			       less_than_100 += "WHERE CR.bill < 100 ";
+			       less_than_100 += "AND Cust.id = SR.customer_id ";
+			       less_than_100 += "AND SR.rid = CR.rid;";
 
 			int numRows = esql.executeQueryAndPrintResult(less_than_100);
 			System.out.println("Total row(s): " + numRows);
