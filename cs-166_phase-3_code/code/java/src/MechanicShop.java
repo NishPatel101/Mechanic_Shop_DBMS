@@ -369,7 +369,7 @@ public class MechanicShop{
 				String inputID = in.readLine();
 				int cid = Integer.parseInt(inputID);
 				String selectCar = "SELECT ROW_NUMBER() OVER (ORDER BY O.car_vin), C FROM Customer Cust, Owns O, Car C WHERE Cust.id = O.customer_id AND C.vin = O.car_vin AND O.customer_id = '" + cid + "'";
-				int numRows = esql.executeQueryAndPrintResult(selectCar);
+				numRows = esql.executeQueryAndPrintResult(selectCar);
 				System.out.print("Input row number of car to select or 0 to add a new car: ");
 				String rowChoice = in.readLine();
 				int row = Integer.parseInt(rowChoice);
