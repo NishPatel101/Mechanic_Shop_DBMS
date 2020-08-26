@@ -516,8 +516,11 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 	public static void ListKCarsWithTheMostServices(MechanicShop esql){//9
 		try{	
 			System.out.print("Input how many cars should be listed: ");
-			//String numCars_string = in.readLine();
-			//int numCars = Integer.parseInt(numCars_string);
+			String numCars_string = in.readLine();
+			int numCars = Integer.parseInt(numCars_string);
+			
+			//String query = "SELECT C.make, C.model, C.vin, COUNT(service_request)
+			
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
