@@ -518,7 +518,7 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 			System.out.print("Input how many cars should be listed: ");
 			String k_amOuNt = in.readLine();
 
-			String query = "SELECT C.make, C.model, mostServices.numOfService FROM Car C, (SELECT S.car_vin, COUNT(S.car_vin) as numOfServices FROM Service_Request S WHERE S.rid NOT IN (SELECT C.rid FROM Closed_Request.C) GROUP BY S.car_vin ORDER BY numOfServices DESC) AS sortedNumServices WHERE C.vin = sortedNumServices LIMIT" + k_amount + ";";
+			String query = "SELECT C.make, C.model, sortedNumServices.numOfService FROM Car C, (SELECT S.car_vin, COUNT(S.car_vin) as numOfServices FROM Service_Request S WHERE S.rid NOT IN (SELECT C.rid FROM Closed_Request.C) GROUP BY S.car_vin ORDER BY numOfServices DESC) AS sortedNumServices WHERE C.vin = sortedNumServices.car_vin LIMIT" + k_amount + ";";
 			
 			int rowCount = esql.executeQueryAndPrintResult(query);
  			System.out.println ("total row(s): " + rowCount);
