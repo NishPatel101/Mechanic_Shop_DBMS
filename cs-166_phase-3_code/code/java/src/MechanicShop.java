@@ -502,6 +502,50 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 		}
 	}
 	public static void CloseServiceRequest(MechanicShop esql) throws Exception{//5
+			String query;
+			int count;
+		
+			//finds size for CID
+			String findCRsize = "SELECT wid FROM Closed_Request;"; 
+			List<List<String>> CR_size = esql.executeQueryAndReturnResult(querySize);
+			int CID = CR_size.size();
+			
+			//Get request number from user & check if it exists
+			System.out.println("Insert service request number: ");
+			String requestNum = in.readLine();
+			query = "SELECT * FROM Service_Request SR WHERE SR.rid = \'" + requestNum + "\';";			
+			count = esql.executeQuery(query);
+			if(count == 0) {
+				System.out.println("Service request cannot be found.\n");
+				return;
+			}
+			
+			//Get mechanic id from user & check existence
+			System.out.println("Insert mechanic id: ");
+			String mechID = in.readLine();
+			query = "SELECT * FROM Mechanic M WHERE M.id = \'" + requestNum + "\';";
+			count = esql.executeQuery(query);
+			if(count == 0) {
+				System.out.println("Mechanic ID cannot be found.\n");
+				return;
+			}
+		
+			System.out.println("Insert repair comments: ");
+			String comment = in.readLine();
+		
+			System.out.println("Insert bill charge amount: ");
+			String billAmt = in.readLine();
+		
+			//check if closing date is after the request date
+			query = "SELECT * FROM Service_Request SR WHERE SR.rid = '" + requestNum + "' AND SR.date <= CURRENT_DATE;";
+			count = esql.executeQuery(query);
+			if(count == 0) {
+				System.out.println("Closing date is invalid. Date must be after request date.\n");
+				return;
+			}
+		
+			query = "INSERT INTO Closed_Request (wid, rid, mid, date, comment, bill) VALUES (\'" + CID + "\',\'" + requestNum + "\',\'" + mechID + "\',\'" + comment + "\','" + billAmt + "\');";
+			esql.executeUpdate(query);
 		
 	}
 	
