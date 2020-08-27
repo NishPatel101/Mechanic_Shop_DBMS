@@ -516,10 +516,9 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 	public static void ListKCarsWithTheMostServices(MechanicShop esql){//9
 		try{	
 			System.out.print("Input how many cars should be listed: ");
-			String numCars_string = in.readLine();
-			int numCars = Integer.parseInt(numCars_string);
+			String numCars = in.readLine();
 			
-			//String query = "SELECT C.make, C.model, C.vin, COUNT(service_request)
+			String query = "SELECT C.make, C.model, C.vin, COUNT(SR) AS numServices FROM Car C,Service_Request SR WHERE SR.rid NOT IN (SELECT SR.rid FROM Closed_Request CR,Service_Request SR2 WHERE SR2.rid = CR.rid) AND C.vin = SR2.car_vin GROUP BY C.make,C.model,C.vin ORDER BY numServices DESC LIMIT " + numCars + ";";
 			
 		}
 		catch (Exception e) {
