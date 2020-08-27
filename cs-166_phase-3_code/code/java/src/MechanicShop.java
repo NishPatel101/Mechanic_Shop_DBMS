@@ -544,7 +544,8 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 				return;
 			}
 		
-			query = "INSERT INTO Closed_Request (wid, rid, mid, date, comment, bill) VALUES (\'" + CID + "\',\'" + requestNum + "\',\'" + mechID + "\',\'" + CURRENT_DATE + "\',\'" + comment + "\','" + billAmt + "\');";
+			query = "INSERT INTO Closed_Request (wid, rid, mid, date, comment, bill) VALUES (" + CID + "," + requestNum + "," + mechID + "," + CURRENT_DATE + "," + comment + "," + billAmt + ");";
+			//query = "INSERT INTO Closed_Request (wid, rid, mid, date, comment, bill) VALUES (\'" + CID + "\',\'" + requestNum + "\',\'" + mechID + "\'," + CURRENT_DATE + ",\'" + comment + "\','" + billAmt + "\');";
 			esql.executeUpdate(query);
 		
 	}
