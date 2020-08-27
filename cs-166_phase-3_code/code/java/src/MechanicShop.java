@@ -537,7 +537,7 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 			String billAmt = in.readLine();
 		
 			//check if closing date is after the request date
-			query = "SELECT * FROM Service_Request SR WHERE SR.rid = '" + requestNum + "' AND SR.date <= NOW;";
+			query = "SELECT * FROM Service_Request SR WHERE SR.rid = '" + requestNum + "' AND SR.date <= NOW();";
 			count = esql.executeQuery(query);
 			if(count == 0) {
 				System.out.println("Closing date is invalid. Date must be after request date.\n");
@@ -545,7 +545,7 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 			}
 		
 			//query = "INSERT INTO Closed_Request (wid, rid, mid, date, comment, bill) VALUES (" + CID + "," + requestNum + "," + mechID + "," + CURRENT_DATE + "," + comment + "," + billAmt + ");";
-			query = "INSERT INTO Closed_Request (wid, rid, mid, date, comment, bill) VALUES (\'" + CID + "\',\'" + requestNum + "\',\'" + mechID + "\',\'" + "NOW" + "\',\'" + comment + "\','" + billAmt + "\');";
+			query = "INSERT INTO Closed_Request (wid, rid, mid, date, comment, bill) VALUES (\'" + CID + "\',\'" + requestNum + "\',\'" + mechID + "\',\'" + "NOW()" + "\',\'" + comment + "\','" + billAmt + "\');";
 			esql.executeUpdate(query);
 		
 	}
