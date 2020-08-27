@@ -507,7 +507,7 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 		
 			//finds size for CID
 			String findCRsize = "SELECT wid FROM Closed_Request;"; 
-			List<List<String>> CR_size = esql.executeQueryAndReturnResult(querySize);
+			List<List<String>> CR_size = esql.executeQueryAndReturnResult(findCRsize);
 			int CID = CR_size.size();
 			
 			//Get request number from user & check if it exists
