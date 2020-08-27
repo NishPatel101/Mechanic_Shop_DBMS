@@ -550,8 +550,10 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 	
 	public static void ListKCarsWithTheMostServices(MechanicShop esql){//9
 		try{	
-			/*System.out.print("Input how many cars should be listed: ");
+			System.out.print("Input how many cars should be listed: ");
 			String k_amount = in.readLine();
+			
+			/*
 			String query = "SELECT C.make, C.model, mostServices.amt_service ";
 			query += "FROM Car C, (";
 				query += "SELECT S.car_vin, COUNT(S.car_vin) as amt_service ";
