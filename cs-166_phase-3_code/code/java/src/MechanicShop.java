@@ -515,19 +515,10 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 	
 	public static void ListKCarsWithTheMostServices(MechanicShop esql){//9
 		try{	
-		System.out.print("Cars should have how many Service Orders Open? ");
-		String tempServ = in.readLine();
-		int numServ = Integer.parseInt(tempServ);
-
-		System.out.print("How many cars would you like to see ");
-		tempServ = in.readLine();
-		int carServ = Integer.parseInt(tempServ);
-
-		String query = String.format("SELECT Car.make, Car.model, Car.vin, COUNT(Service_Request) as cnt FROM Car,Service_Request WHERE Service_Request.rid NOT IN (SELECT Service_Request.rid FROM Closed_Request,Service_Request WHERE Service_Request.rid = Closed_Request.rid) AND Car.vin = Service_Request.car_vin GROUP BY Car.make,Car.model,Car.vin HAVING COUNT(*) = %d ORDER BY cnt DESC LIMIT %d",numServ,carServ);
-			//System.out.print("Input how many cars should be listed: ");
-			//String numCars = in.readLine();
+			System.out.print("Input how many cars should be listed: ");
+			String numCars = in.readLine();
 			
-			//String query = "SELECT C.make, C.model, C.vin, COUNT(SR) AS numServices FROM Car C,Service_Request SR WHERE SR.rid NOT IN (SELECT SR.rid FROM Closed_Request CR,Service_Request SR WHERE SR.rid = CR.rid) AND C.vin = SR.car_vin GROUP BY C.make,C.model,C.vin ORDER BY numServices DESC LIMIT " + numCars + ";";
+			String query = "SELECT C.make, C.model, C.vin, COUNT(SR) AS numServices FROM Car C,Service_Request WHERE Service_Request.rid NOT IN (SELECT Service_Request.rid FROM Closed_Request CR,Service_Request SR WHERE Service_Request.rid = CR.rid) AND C.vin = Service_Request.car_vin GROUP BY C.make,C.model,C.vin ORDER BY numServices DESC LIMIT " + numCars + ";";
 			
 			int rowCount = esql.executeQueryAndPrintResult(query);
  			System.out.println ("total row(s): " + rowCount);
