@@ -476,7 +476,7 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 						System.out.print("Choose a vin from the list: ");
 						editVin = scan.nextLine();
 						//Check vin as valid in list
-						String check = "SELECT C.vin FROM Car C, Customer Cust, Owns O WHERE C.vin = " + editVin + " AND C.vin = O.car_vin AND O.customer_id = Cust.id;";
+						String check = "SELECT C.vin FROM Car C, Customer Cust, Owns O WHERE C.vin = '" + editVin + "' AND C.vin = O.car_vin AND O.customer_id = Cust.id;";
 						List<List<String>> checkCarSelect = esql.executeQueryAndReturnResult(check);
 						if (checkCarSelect.isEmpty()) {
 							System.out.print("Vin not found in list.");	
