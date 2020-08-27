@@ -14,6 +14,7 @@
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.Scanner;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -470,9 +471,10 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 					
 					boolean validVin = false;
 					String editVin = "";
+					Scanner scan = new Scanner(System.in);
 					do {
 						System.out.print("Choose a vin from the list: ");
-						editVin = in.readLine();
+						editVin = scan.nextLine();
 						//Check vin as valid in list
 						String check = "SELECT C.vin FROM Car C, Customer Cust, Owns O WHERE C.vin = " + editVin + " AND C.vin = O.car_vin AND O.customer_id = Cust.id;";
 						List<List<String>> checkCarSelect = esql.executeQueryAndReturnResult(check);
@@ -486,9 +488,9 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 					
 
 					System.out.print("Enter odometer reading on the car: ");
-					String odometer = in.readLine();
+					String odometer = scan.nextLine();
 					System.out.print("Enter customer's complaint(s) about the car: ");
-					String complaint = in.readLine();
+					String complaint = scan.nextLine();
 
 					String addServiceRequest = "INSERT INTO Service_Request (rid, customer_id, car_vin, date, odometer, complain) VALUES (" + Integer.toString(rid) + ", " + inputCID + ", '" + editVin + "', CURRENT_DATE, " + odometer + ", '" + complaint + "');";
 					esql.executeUpdate(addServiceRequest);
