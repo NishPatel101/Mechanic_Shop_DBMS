@@ -550,13 +550,29 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 		try{	
 			System.out.print("Input how many cars should be listed: ");
 			String k_amount = in.readLine();
-
-			String query = "SELECT C.make, C.model, sortedNumServices.numOfServices FROM Car C, (SELECT S.car_vin, COUNT(S.car_vin) as numOfServices FROM Service_Request S WHERE S.rid NOT IN (SELECT CR.rid FROM Closed_Request CR) GROUP BY S.car_vin ORDER BY numOfServices DESC) sortedNumServices ORDER BY sortedNumServices.numOfServices DESC LIMIT " + k_amount + ";";
+			String query = "SELECT C.make, C.model, mostServices.amt_service ";
+			query += "FROM Car C, (";
+				query += "SELECT S.car_vin, COUNT(S.car_vin) as amt_service ";
+				query += "FROM Service_Request S ";
+				query += "WHERE S.rid NOT IN ( ";
+					query += "SELECT C.rid ";
+					query += "FROM Closed_Request C ";
+				query += ") GROUP BY S.car_vin ";
+				query += "ORDER BY amt_service DESC ";
+				query += ") mostServices ";
+			query += "WHERE C.vin = mostServices.car_vin ";
+			query += "ORDER BY mostServices.amt_service DESC ";
+			query += "LIMIT " + k_amount + ";";
+			esql.executeQueryAndPrintResult(query);
+			
+			
+				
+			//String query = "SELECT C.make, C.model, sortedNumServices.numOfServices FROM Car C, (SELECT S.car_vin, COUNT(S.car_vin) as numOfServices FROM Service_Request S WHERE S.rid NOT IN (SELECT CR.rid FROM Closed_Request CR) GROUP BY S.car_vin ORDER BY numOfServices DESC) sortedNumServices ORDER BY sortedNumServices.numOfServices DESC LIMIT " + k_amount + ";";
 			//String query = "SELECT C.make, C.model, sortedNumServices.numOfServices FROM Car C, (SELECT S.car_vin, COUNT(S.car_vin) as numOfServices FROM Service_Request S WHERE S.rid NOT IN (SELECT CR.rid FROM Closed_Request CR) GROUP BY S.car_vin ORDER BY numOfServices DESC) sortedNumServices ORDER BY sortedNumServices.numOfServices DESC LIMIT " + k_amount + ";";
 			//String query = "SELECT C.make, C.model, sortedNumServices.numOfServices FROM Car C, (SELECT S.car_vin, COUNT(S.car_vin) as numOfServices FROM Service_Request S WHERE S.rid NOT IN (SELECT CR.rid FROM Closed_Request CR) GROUP BY S.car_vin ORDER BY numOfServices DESC) AS sortedNumServices WHERE C.vin = sortedNumServices.car_vin LIMIT " + k_amount + ";";
 			
-			int rowCount = esql.executeQueryAndPrintResult(query);
- 			System.out.println ("total row(s): " + rowCount);
+			//int rowCount = esql.executeQueryAndPrintResult(query);
+ 			//System.out.println ("total row(s): " + rowCount);
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
