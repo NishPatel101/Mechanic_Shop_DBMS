@@ -523,7 +523,7 @@ public static void InsertServiceRequest(MechanicShop esql){//4
 			//Get mechanic id from user & check existence
 			System.out.println("Insert mechanic id: ");
 			String mechID = in.readLine();
-			query = "SELECT * FROM Mechanic M WHERE M.id = \'" + requestNum + "\';";
+			query = "SELECT * FROM Mechanic M WHERE M.id = \'" + mechID + "\';";
 			count = esql.executeQuery(query);
 			if(count == 0) {
 				System.out.println("Mechanic ID cannot be found.\n");
