@@ -30,7 +30,7 @@ cd cs-166_phase-3_code/code/java
 ```
 ./compile.sh
 ```
-  Or if you choose to run the code you can run the run.sh script with arguments:
+    Or if you choose to run the code you can run the run.sh script with arguments:
 ```
 ./run.sh <DBNAME> <PORT> <USER>
 ```
