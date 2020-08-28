@@ -21,8 +21,19 @@ Pipelining a SQL script (to execute SQL commands in bulk, and copies information
 psql -h /tmp/$LOGNAME/sockets $DB_NAME < create.sql
 ```
 
+4. Now that the database has been created with information inside, we can run the Java program:
+```
+cd cs-166_phase-3_code/code/java
+```
 
-
+5. You can compile the code located in the /src folder by running the script:
+```
+./compile.sh
+```
+Or if you choose to run the code you can run the run.sh script with arguments:
+```
+./run.sh <DBNAME> <PORT> <USER>
+```
 
 ## Contributers
 * Johnny Vo (jvo033@ucr.edu)
