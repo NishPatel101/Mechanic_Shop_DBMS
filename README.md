@@ -26,9 +26,8 @@ and check the status if the server has started by running the script:
 ```
 ./check_status.sh
 ```
-3. Download the github repository (.zip) in /tmp/$LOGNAME and extract it.
-4. Set the extracted folder as your current directory.
-5. Run these commands into the terminal (make sure a PostgreSQL server is running before this instruction):
+3. Download the github repository in /tmp/$LOGNAME and extract it or use git clone to copy the repo on your machine.
+4. Run these commands into the terminal (make sure a PostgreSQL server is running before this instruction):
 
 Creating a database, $DB_NAME can be replaced in **ALL** instructions to whatever name you want the database to be.
 ```
@@ -40,16 +39,16 @@ Pipelining a SQL script (to execute SQL commands in bulk, and copies information
 psql -h /tmp/$LOGNAME/sockets $DB_NAME < create.sql
 ```
 
-6. Now that the database has been created with information inside, we can run the Java program:
+5. Now that the database has been created with information inside, we can run the Java program:
 ```
 cd cs-166_phase-3_code/code/java
 ```
 
-7. You can compile the code located in the /src folder by running the script:
+6. You can compile the code located in the /src folder by running the script:
 ```
 ./compile.sh
 ```
-8. Finally, to start up the Java program you can run the run.sh script with arguments:
+7. Finally, to start up the Java program you can run the run.sh script with arguments:
 ```
 ./run.sh <$DB_NAME> <PORT> <USER>
 ```
