@@ -7,9 +7,28 @@ The system will be used track information about customers, cars, mechanics, car 
 ## Quick Start Manual (instructions for a UCR lab machine with PostgreSQL installed, possbily works on your local machine)
 
 Instructions on running the Java application:
-1. Download the github repository (.zip) and extract it.
-2. Set the extracted folder as your current directory.
-3. Run these commands into the terminal (make sure a PostgreSQL server is running before this instruction):
+1. Create the neccessary directories by running these commands:
+```
+mkdir /tmp/$LOGNAME
+cd /tmp/$LOGNAME
+mkdir test
+mkdir test/data
+mkdir sockets
+export PGPORT=5432
+export PGDATA=/tmp/$LOGNAME/test/data
+initdb
+```
+2. Start the server by running the script:
+```
+./start_server.sh
+```
+and check the status if the server has started by running the script:
+```
+./check_status.sh
+```
+3. Download the github repository (.zip) in /tmp/$LOGNAME and extract it.
+4. Set the extracted folder as your current directory.
+5. Run these commands into the terminal (make sure a PostgreSQL server is running before this instruction):
 
 Creating a database, $DB_NAME can be replaced in **ALL** instructions to whatever name you want the database to be.
 ```
@@ -21,24 +40,29 @@ Pipelining a SQL script (to execute SQL commands in bulk, and copies information
 psql -h /tmp/$LOGNAME/sockets $DB_NAME < create.sql
 ```
 
-4. Now that the database has been created with information inside, we can run the Java program:
+6. Now that the database has been created with information inside, we can run the Java program:
 ```
 cd cs-166_phase-3_code/code/java
 ```
 
-5. You can compile the code located in the /src folder by running the script:
+7. You can compile the code located in the /src folder by running the script:
 ```
 ./compile.sh
 ```
-6. Finally, to start up the Java program you can run the run.sh script with arguments:
+8. Finally, to start up the Java program you can run the run.sh script with arguments:
 ```
-./run.sh <DBNAME> <PORT> <USER>
+./run.sh <$DB_NAME> <PORT> <USER>
 ```
 Example (using UCR lab machines, with PostgreSQL server running on port 5432)
 ```
-./run.sh $DB_NAME 5432 jvo033
+./run.sh test_DB 5432 jvo033
 ```
 You should be able to see the interactive menu at this point.
+9. Once you are done running the Java program, set the current directory back to /tmp/$LOGNAME and stop the server by running the script:
+```
+cd /tmp/$LOGNAME
+./flush.sh
+```
 
 ## Contributers
 * Johnny Vo (jvo033@ucr.edu)
