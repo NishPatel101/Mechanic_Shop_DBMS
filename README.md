@@ -58,7 +58,8 @@ Example (using UCR lab machines, with PostgreSQL server running on port 5432)
 ./run.sh test_DB 5432 jvo033
 ```
 You should be able to see the interactive menu at this point.
-9. Once you are done running the Java program, set the current directory back to /tmp/$LOGNAME and stop the server by running the script:
+
+9. Once you are done running the Java program, set the current directory back to /tmp/$LOGNAME:
 ```
 cd /tmp/$LOGNAME
 ```
