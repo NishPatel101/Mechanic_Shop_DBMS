@@ -11,13 +11,15 @@ Instructions on running the Java application:
 2. Set the extracted folder as your current directory.
 3. Run these commands into the terminal (make sure a PostgreSQL server is running before this instruction):
 
-Creating a database
+Creating a database, $DB_NAME can be replaced in **ALL** instructions to whatever name you want the database to be.
 ```
 createdb -h /tmp/$LOGNAME/sockets $DB_NAME
 ```
-$DB_NAME can be changed to whatever name you want the database to be.
 
-Pipelining a SQL script (to execute SQL commands in bulk, and copies information from .csv files in directory /csv_data
+Pipelining a SQL script (to execute SQL commands in bulk, and copies information from .csv files in directory /csv_data)
+```
+psql -h /tmp/$LOGNAME/sockets $DB_NAME < create.sql
+```
 
 
 
