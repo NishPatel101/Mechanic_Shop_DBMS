@@ -68,7 +68,7 @@ and stop the server by running the script
 ```
 ./flush.sh
 ```
-\
+
 ## Contributers
 * Johnny Vo (jvo033@ucr.edu)
 * Nish Patel (npate145@ucr.edu)
