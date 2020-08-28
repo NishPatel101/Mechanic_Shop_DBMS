@@ -12,9 +12,9 @@ Instructions on running the Java application:
 3. Run these commands into the terminal (make sure a PostgreSQL server is running before this instruction):
 
 Creating a database
-'''
+```
 createdb -h /tmp/$LOGNAME/sockets $DB_NAME
-'''
+```
 $DB_NAME can be changed to whatever name you want the database to be.
 
 Pipelining a SQL script (to execute SQL commands in bulk, and copies information from .csv files in directory /csv_data
