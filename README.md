@@ -37,6 +37,7 @@ cd cs-166_phase-3_code/code/java
 Example (using UCR lab machines, with PostgreSQL server running on port 5432)
 ```
 ./run.sh $DB_NAME 5432 jvo033
+```
 
 ## Contributers
 * Johnny Vo (jvo033@ucr.edu)
