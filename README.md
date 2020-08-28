@@ -61,6 +61,7 @@ You should be able to see the interactive menu at this point.
 9. Once you are done running the Java program, set the current directory back to /tmp/$LOGNAME and stop the server by running the script:
 ```
 cd /tmp/$LOGNAME
+
 ./flush.sh
 ```
 
