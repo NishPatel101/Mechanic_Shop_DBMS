@@ -4,7 +4,7 @@ The system will be used track information about customers, cars, mechanics, car 
 
 **PLEASE NOTE: PostgreSQL needs to be installed and running on the machine to run the Java program**
 
-## Quick Start Manual (instructions for a UCR lab machine, possbily works on your local machine)
+## Quick Start Manual (instructions for a UCR lab machine with PostgreSQL installed, possbily works on your local machine)
 
 Instructions on running the Java application:
 1. Download the github repository (.zip) and extract it.
